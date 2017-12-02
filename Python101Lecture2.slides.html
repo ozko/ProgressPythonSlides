@@ -12142,14 +12142,17 @@ Removes the first occurance of object obj from list</li>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Functions---just-pieces-of-reusable-functionality(code)">Functions - just pieces of reusable functionality(code)<a class="anchor-link" href="#Functions---just-pieces-of-reusable-functionality(code)">&#182;</a></h1><hr>
-<div class="highlight"><pre><span></span><span class="n">IN</span><span class="p">:</span> <span class="k">def</span> <span class="nf">printme</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
-        <span class="k">return</span>
-</pre></div>
+<h1 id="Revision">Revision<a class="anchor-link" href="#Revision">&#182;</a></h1><p><img style="float: right;width:200px;height:430px;" src="http://vignette3.wikia.nocookie.net/simpsons/images/8/82/Bart%27s_eldest_son.png/revision/latest?cb=20141028004949" ></p>
 <ul>
-<li>Let's make our rectangle program reusable - put it inside a function</li>
+<li>Dictionaries.</li>
+<li>Show me what you got. Demonstrate operations on lists. Do not forget unpacking.</li>
+<li>Some fancy output formatting.</li>
 </ul>
+<h2 id="Let's-learn-something-new:-Sets">Let's learn something new: Sets<a class="anchor-link" href="#Let's-learn-something-new:-Sets">&#182;</a></h2><p>The set is an unordered collection of unique and immutable objects. 
+Don't mind the <strong>immutability</strong> part for now.</p>
+<div class="highlight"><pre><span></span><span class="n">IN</span><span class="p">:</span> <span class="n">x</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s2">&quot;Perl&quot;</span><span class="p">,</span> <span class="s2">&quot;Python&quot;</span><span class="p">,</span> <span class="s2">&quot;Java&quot;</span><span class="p">,</span> <span class="s2">&quot;Python&quot;</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
 
 </div>
 </div>
@@ -12158,8 +12161,44 @@ Removes the first occurance of object obj from list</li>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Code-formatting-PEP8---tabs-vs-spaces">Code formatting PEP8 - tabs vs spaces<a class="anchor-link" href="#Code-formatting-PEP8---tabs-vs-spaces">&#182;</a></h1><hr>
+<h2 id="Sets---Union(|),-Intersection(&amp;),-Difference(-)">Sets - Union(|), Intersection(&amp;), Difference(-)<a class="anchor-link" href="#Sets---Union(|),-Intersection(&amp;),-Difference(-)">&#182;</a></h2><p><img src="http://jwilson.coe.uga.edu/EMAT6680Su12/Carreras/EMAT6690/Essay2/circles[1].JPG" alt="Overlapping Circles"></p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Code-formatting-PEP8----tabs-vs-spaces-">Code formatting PEP8 - <strong> tabs vs spaces </strong><a class="anchor-link" href="#Code-formatting-PEP8----tabs-vs-spaces-">&#182;</a></h1><hr>
 <p><a href="https://www.youtube.com/watch?v=SsoOG6ZeyUI" title="Tabs vs Spaces"><img src="http://img.youtube.com/vi/SsoOG6ZeyUI/0.jpg" alt="Tabs vs spaces"></a></p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="More-PEP-8">More PEP 8<a class="anchor-link" href="#More-PEP-8">&#182;</a></h2><p><a href="http://pymbook.readthedocs.io/en/latest/pep8.html">Learn PEP8 from here, believe me</a></p>
+<p><a href="https://github.com/PyCQA/pylint">Homework: understand linters and PyLint</a></p>
+<p><a href="http://flake8.pycqa.org/en/latest/">Homework: Flake8</a></p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Functions---just-pieces-of-reusable-functionality(code)">Functions - just pieces of reusable functionality(code)<a class="anchor-link" href="#Functions---just-pieces-of-reusable-functionality(code)">&#182;</a></h1><hr>
+<div class="highlight"><pre><span></span><span class="n">IN</span><span class="p">:</span> <span class="k">def</span> <span class="nf">printme</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+        <span class="k">return</span>
+</pre></div>
+<ul>
+<li>Let's make our rectangle program reusable - put it inside a function</li>
+</ul>
 
 </div>
 </div>
@@ -12263,17 +12302,11 @@ Removes the first occurance of object obj from list</li>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="continue-statement"><em>continue</em> statement<a class="anchor-link" href="#continue-statement">&#182;</a></h2><hr>
-
-<pre><code>pyton
-IN:  for my_var in range(0,100):
-        if my_var &lt; 10:
-            continue
-        elif my_var == 10:
-            print("hit")
-        elif my_var &gt; 10:
-            print("passed")
-        my_var = my_var + 1</code></pre>
+<h2 id="for-statement"><em>for</em> statement<a class="anchor-link" href="#for-statement">&#182;</a></h2><hr>
+<div class="highlight"><pre><span></span><span class="n">IN</span><span class="p">:</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;The for loop is over&#39;</span><span class="p">)</span>
+</pre></div>
 
 </div>
 </div>
@@ -12282,10 +12315,38 @@ IN:  for my_var in range(0,100):
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="for-statement"><em>for</em> statement<a class="anchor-link" href="#for-statement">&#182;</a></h2><hr>
-<div class="highlight"><pre><span></span><span class="n">IN</span><span class="p">:</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;The for loop is over&#39;</span><span class="p">)</span>
+<h2 id="Iterating-over-lists">Iterating over lists<a class="anchor-link" href="#Iterating-over-lists">&#182;</a></h2><div class="highlight"><pre><span></span><span class="n">IN</span><span class="p">:</span> <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+       <span class="k">print</span> <span class="n">i</span><span class="p">,</span> <span class="n">val</span>
+</pre></div>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Iterating-over-dictionaries">Iterating over dictionaries<a class="anchor-link" href="#Iterating-over-dictionaries">&#182;</a></h2><div class="highlight"><pre><span></span><span class="n">IN</span><span class="p">:</span> <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Number&#39;</span><span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="s1">&#39;Name&#39;</span><span class="p">:</span> <span class="s1">&#39;Ivan&#39;</span><span class="p">}</span> 
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+         <span class="k">print</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="s1">&#39;corresponds to&#39;</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="continue-statement"><em>continue</em> statement<a class="anchor-link" href="#continue-statement">&#182;</a></h2><hr>
+<div class="highlight"><pre><span></span><span class="n">IN</span><span class="p">:</span>  <span class="k">for</span> <span class="n">my_var</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">my_var</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">elif</span> <span class="n">my_var</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;hit&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">my_var</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;passed&quot;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12303,7 +12364,47 @@ IN:  for my_var in range(0,100):
 
 </div>
 </div>
-</div></section></section>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Modules,-Packages">Modules, Packages<a class="anchor-link" href="#Modules,-Packages">&#182;</a></h2><ul>
+<li>import x</li>
+<li>from x import * - not a good practice</li>
+<li>How the interpreter looks for modules. PYTHONPATH.</li>
+<li>Use our program as a module.</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Practice-on-modules---random">Practice on modules - random<a class="anchor-link" href="#Practice-on-modules---random">&#182;</a></h2><ul>
+<li>randint(start, stop)</li>
+<li>random() - no arguments</li>
+<li>uniform(start,stop)</li>
+<li>gauss(mean,stdev)</li>
+<li>randrange(start,stop,step)</li>
+<li>choice(list)</li>
+<li>shuffle(list)</li>
+<li>sample(population,k)</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Practice-on-modules---datetime-and-Requests">Practice on modules - datetime and Requests<a class="anchor-link" href="#Practice-on-modules---datetime-and-Requests">&#182;</a></h2>
+</div>
+</div>
+</div>
 </div>
 </div>
 
