@@ -12109,8 +12109,8 @@ Removes the first occurance of object obj from list</li>
     <span class="n">pesho</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span> <span class="c1"># Update existing entry</span>
     <span class="n">pesho</span><span class="p">[</span><span class="s1">&#39;School&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Some school&quot;</span><span class="p">;</span> <span class="c1"># Add new entry</span>
 
-    <span class="k">print</span> <span class="s2">&quot;pesho[&#39;Age&#39;]: &quot;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">]</span>
-    <span class="k">print</span> <span class="s2">&quot;pesho[&#39;School&#39;]: &quot;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="s1">&#39;School&#39;</span><span class="p">]</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;pesho[&#39;Age&#39;]: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">dict</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">]))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;pesho[&#39;School&#39;]: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">dict</span><span class="p">[</span><span class="s1">&#39;School&#39;</span><span class="p">]))</span>
 </pre></div>
 
 </div>
@@ -12207,8 +12207,8 @@ Don't mind the <strong>immutability</strong> part for now.</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="The-range-function">The range function<a class="anchor-link" href="#The-range-function">&#182;</a></h1><hr>
-<div class="highlight"><pre><span></span><span class="n">IN</span><span class="p">:</span> <span class="n">years</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">12</span><span class="p">)</span>
+<h2 id="The-range-function">The range function<a class="anchor-link" href="#The-range-function">&#182;</a></h2><hr>
+<div class="highlight"><pre><span></span><span class="n">IN</span><span class="p">:</span> <span class="n">years</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2005</span><span class="p">,</span><span class="mi">2012</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
     <span class="k">print</span><span class="p">(</span><span class="n">years</span><span class="p">)</span>
 </pre></div>
 
@@ -12245,11 +12245,31 @@ Don't mind the <strong>immutability</strong> part for now.</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Why-is-it-called-Python?">Why is it called Python?<a class="anchor-link" href="#Why-is-it-called-Python?">&#182;</a></h2><hr>
+<h2 id="Pause-for-some-trivia:-Why-is-it-called-Python?">Pause for some trivia: Why is it called Python?<a class="anchor-link" href="#Pause-for-some-trivia:-Why-is-it-called-Python?">&#182;</a></h2><hr>
 <form>
   <input type="checkbox" name="vehicle" value="Bike"> That big snake.<br>
   <input type="checkbox" name="vehicle" value="Car"> Something else.<br>
 </form>
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Rewriting-the-guessing-game-with-recursion">Rewriting the guessing game with recursion<a class="anchor-link" href="#Rewriting-the-guessing-game-with-recursion">&#182;</a></h2><hr>
+<ul>
+<li>Show why recursion can be tricky - factorial and fibonacci examples</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="n">IN</span><span class="p">:</span> <span class="k">def</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>                            <span class="n">IN</span><span class="p">:</span> <span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>        
+        <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>                                       <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">1</span>                                         <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>                                            <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>                        <span class="k">return</span> <span class="mi">1</span>
+                                                         <span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>                                     <span class="k">return</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
 </div>
 </div>
 </div></section><section>
@@ -12315,6 +12335,24 @@ Don't mind the <strong>immutability</strong> part for now.</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Iterative-factorial">Iterative factorial<a class="anchor-link" href="#Iterative-factorial">&#182;</a></h2><hr>
+<div class="highlight"><pre><span></span><span class="n">IN</span><span class="p">:</span> <span class="k">def</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+        <span class="n">product</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+            <span class="n">product</span> <span class="o">*=</span>   <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">product</span>
+</pre></div>
+<ul>
+<li>Let's rewrite the fibonacci iteratively together</li>
+</ul>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Iterating-over-lists">Iterating over lists<a class="anchor-link" href="#Iterating-over-lists">&#182;</a></h2><div class="highlight"><pre><span></span><span class="n">IN</span><span class="p">:</span> <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
        <span class="k">print</span> <span class="n">i</span><span class="p">,</span> <span class="n">val</span>
@@ -12356,7 +12394,7 @@ Don't mind the <strong>immutability</strong> part for now.</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Almost-there">Almost there<a class="anchor-link" href="#Almost-there">&#182;</a></h2><hr>
+<h2 id="Almost-there....not">Almost there....not<a class="anchor-link" href="#Almost-there....not">&#182;</a></h2><hr>
 <ul>
 <li>But first let's learn how to sort a list(not being lazy and using the clever function).
 <img src="http://i.dailymail.co.uk/i/pix/2012/07/28/article-2180052-143FD5AA000005DC-146_964x529.jpg" alt="Mr Bean at the finish line"></li>
@@ -12364,16 +12402,144 @@ Don't mind the <strong>immutability</strong> part for now.</p>
 
 </div>
 </div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Two-bubble-sorts">Two bubble sorts<a class="anchor-link" href="#Two-bubble-sorts">&#182;</a></h2><hr>
+<div class="highlight"><pre><span></span><span class="n">IN</span><span class="p">:</span> <span class="k">def</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">passes_left</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">passes_left</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">l</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">l</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]:</span>
+                   <span class="n">l</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">l</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">l</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">l</span>
+</pre></div>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Bubble-sort-example-300px.gif" alt="Bubble sort"></p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">badList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">badList</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+<span class="nb">sorted</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="k">while</span> <span class="ow">not</span> <span class="nb">sorted</span><span class="p">:</span>
+    <span class="nb">sorted</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">badList</span><span class="p">[</span><span class="n">element</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">badList</span><span class="p">[</span><span class="n">element</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]:</span>
+            <span class="nb">sorted</span> <span class="o">=</span> <span class="kc">False</span> 
+            <span class="n">hold</span> <span class="o">=</span> <span class="n">badList</span><span class="p">[</span><span class="n">element</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="n">badList</span><span class="p">[</span><span class="n">element</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">badList</span><span class="p">[</span><span class="n">element</span><span class="p">]</span>
+            <span class="n">badList</span><span class="p">[</span><span class="n">element</span><span class="p">]</span> <span class="o">=</span> <span class="n">hold</span>
+            
+<span class="nb">print</span><span class="p">(</span><span class="n">badList</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[3, 6, 8, 12]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Modules,-Packages">Modules, Packages<a class="anchor-link" href="#Modules,-Packages">&#182;</a></h2><ul>
-<li>import x</li>
-<li>from x import * - not a good practice</li>
-<li>How the interpreter looks for modules. PYTHONPATH.</li>
-<li>Use our program as a module.</li>
+<h1 id="File-operations">File operations<a class="anchor-link" href="#File-operations">&#182;</a></h1><hr>
+<p><img src="https://users.soe.ucsc.edu/~charlie/book/notes/chap10/img003.gif" alt="Files"></p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="n">IN</span><span class="p">:</span> <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="err">“</span><span class="n">workfile</span><span class="err">”</span><span class="p">,</span><span class="err">”</span><span class="n">w</span><span class="err">”</span><span class="p">)</span> 
+    <span class="n">all_text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">all_lines</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">closed</span>
+</pre></div>
+<p>Modes:</p>
+<ul>
+<li>‘r’ – Read mode which is used when the file is only being read </li>
+<li>‘w’ – Write mode which is used to edit and write new information to the file (any existing files with the same name will be erased when this mode is activated) </li>
+<li>‘a’ – Appending mode, which is used to add new data to the end of the file; that is new information is automatically amended to the end </li>
+<li>‘r+’ – Special read and write mode, which is used to handle both actions when working with a file </li>
+</ul>
+<p>Moving to the beginning of a file</p>
+<div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="With-open">With open<a class="anchor-link" href="#With-open">&#182;</a></h2><hr>
+<blockquote><p>It is good practice to use the with keyword when dealing with file objects. The advantage is that the file is properly closed after its suite finishes, even if an exception is raised at some point. Using with is also much shorter than writing equivalent try-finally blocks:</p>
+</blockquote>
+<div class="highlight"><pre><span></span><span class="n">IN</span><span class="p">:</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;workfile&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">read_data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Modules,-Packages">Modules, Packages<a class="anchor-link" href="#Modules,-Packages">&#182;</a></h2><hr>
+<ul>
+<li>Help us logically organize our code</li>
+<li>Distribution of reusable functionality is easier this way</li>
+<li>Module - any Python (.py, .pyw) file</li>
+<li>Package - collection of python modules. Will get to them when we speak about OOP.<blockquote><p>It’s important to keep in mind that all packages are modules, but not all modules are packages. Or put another way, packages are just a special kind of module. Specifically, any module that contains a <strong>path</strong> attribute is considered a package.</p>
+</blockquote>
+</li>
+</ul>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Package-managers-and-package-repositories">Package managers and package repositories<a class="anchor-link" href="#Package-managers-and-package-repositories">&#182;</a></h2><hr>
+<ul>
+<li><a href="https://pypi.python.org/pypi">PyPi repo</a></li>
+<li>PIP and easy_install</li>
+<li>Wheels and eggs </li>
+<li>Do not trust someone else's code!!!</li>
 </ul>
 
 </div>
@@ -12383,7 +12549,9 @@ Don't mind the <strong>immutability</strong> part for now.</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Practice-on-modules---random">Practice on modules - random<a class="anchor-link" href="#Practice-on-modules---random">&#182;</a></h2><ul>
+<h2 id="Practice-on-modules---random">Practice on modules - random<a class="anchor-link" href="#Practice-on-modules---random">&#182;</a></h2><hr>
+<p><img style="float: right;width:200px;height:200px;" src="https://images-na.ssl-images-amazon.com/images/I/410XLGFACmL._SL500_AC_SS350_.jpg" ></p>
+<ul>
 <li>randint(start, stop)</li>
 <li>random() - no arguments</li>
 <li>uniform(start,stop)</li>
@@ -12393,10 +12561,11 @@ Don't mind the <strong>immutability</strong> part for now.</p>
 <li>shuffle(list)</li>
 <li>sample(population,k)</li>
 </ul>
+<p>Try the <strong>math</strong> module by yourself now</p>
 
 </div>
 </div>
-</div>
+</div></section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
