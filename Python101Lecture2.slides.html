@@ -12389,12 +12389,32 @@ Don't mind the <strong>immutability</strong> part for now.</p>
 
 </div>
 </div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="pass-statement(keyword)"><em>pass</em> statement(keyword)<a class="anchor-link" href="#pass-statement(keyword)">&#182;</a></h2><div class="highlight"><pre><span></span><span class="n">IN</span><span class="p">:</span> <span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
+<span class="n">OUT</span><span class="p">:</span>  <span class="o">^</span>
+<span class="ne">SyntaxError</span><span class="p">:</span> <span class="n">unexpected</span> <span class="n">EOF</span> <span class="k">while</span> <span class="n">parsing</span>
+</pre></div>
+<p>Compare:</p>
+<div class="highlight"><pre><span></span><span class="n">IN</span><span class="p">:</span> <span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
+        <span class="k">pass</span>
+<span class="n">OUT</span><span class="p">:</span>
+</pre></div>
+<ul>
+<li>Useful for testing/stubbing when you want to have some skeleton but don't want to implement the functionality just yet. </li>
+</ul>
+
+</div>
+</div>
 </div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Almost-there....not">Almost there....not<a class="anchor-link" href="#Almost-there....not">&#182;</a></h2><hr>
+<h2 id="Almost-there-with-the-basics....not">Almost there with the basics....not<a class="anchor-link" href="#Almost-there-with-the-basics....not">&#182;</a></h2><hr>
 <ul>
 <li>But first let's learn how to sort a list(not being lazy and using the clever function).
 <img src="http://i.dailymail.co.uk/i/pix/2012/07/28/article-2180052-143FD5AA000005DC-146_964x529.jpg" alt="Mr Bean at the finish line"></li>
@@ -12487,10 +12507,11 @@ Don't mind the <strong>immutability</strong> part for now.</p>
 </pre></div>
 <p>Modes:</p>
 <ul>
-<li>‘r’ – Read mode which is used when the file is only being read </li>
+<li>‘r’ – The default open mode. Read mode which is used when the file is only being read </li>
 <li>‘w’ – Write mode which is used to edit and write new information to the file (any existing files with the same name will be erased when this mode is activated) </li>
 <li>‘a’ – Appending mode, which is used to add new data to the end of the file; that is new information is automatically amended to the end </li>
 <li>‘r+’ – Special read and write mode, which is used to handle both actions when working with a file </li>
+<li><strong>‘a+’ –  Opens a file for both appending and reading. The file pointer is at the end of the file if the file exists. The file opens in the append mode. If the file does not exist, it creates a new file for reading and writing.</strong></li>
 </ul>
 <p>Moving to the beginning of a file</p>
 <div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
@@ -12512,6 +12533,25 @@ Don't mind the <strong>immutability</strong> part for now.</p>
 
 </div>
 </div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Prepending-a-line-to-the-beginning-of-the-file">Prepending a line to the beginning of the file<a class="anchor-link" href="#Prepending-a-line-to-the-beginning-of-the-file">&#182;</a></h2><hr>
+<ul>
+<li>Inefficient, don't do it.</li>
+<li>That's why Python does not have too straightforward way to shoot ourselves in the leg.</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">line_prepender</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r+&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">content</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
 </div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -12522,7 +12562,8 @@ Don't mind the <strong>immutability</strong> part for now.</p>
 <li>Help us logically organize our code</li>
 <li>Distribution of reusable functionality is easier this way</li>
 <li>Module - any Python (.py, .pyw) file</li>
-<li>Package - collection of python modules. Will get to them when we speak about OOP.<blockquote><p>It’s important to keep in mind that all packages are modules, but not all modules are packages. Or put another way, packages are just a special kind of module. Specifically, any module that contains a <strong>path</strong> attribute is considered a package.</p>
+<li>Package - collection of python modules. Will get to them when we speak about OOP.</li>
+<li>Useful <a href="https://python-packaging.readthedocs.io/en/latest/minimal.html">guide</a> on how to package a code for publishing.<blockquote><p>It’s important to keep in mind that all packages are modules, but not all modules are packages. Or put another way, packages are just a special kind of module. Specifically, any module that contains a <strong>path</strong> attribute is considered a package.</p>
 </blockquote>
 </li>
 </ul>
@@ -12540,6 +12581,9 @@ Don't mind the <strong>immutability</strong> part for now.</p>
 <li>PIP and easy_install</li>
 <li>Wheels and eggs </li>
 <li>Do not trust someone else's code!!!</li>
+<li>The usage of:<div class="highlight"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+</pre></div>
+</li>
 </ul>
 
 </div>
@@ -12561,7 +12605,7 @@ Don't mind the <strong>immutability</strong> part for now.</p>
 <li>shuffle(list)</li>
 <li>sample(population,k)</li>
 </ul>
-<p>Try the <strong>math</strong> module by yourself now</p>
+<p>Research and try the <strong>math</strong> module by yourself now - pow, sqrt, abs, floor, pi.</p>
 
 </div>
 </div>
@@ -12570,7 +12614,153 @@ Don't mind the <strong>immutability</strong> part for now.</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Practice-on-modules---datetime-and-Requests">Practice on modules - datetime and Requests<a class="anchor-link" href="#Practice-on-modules---datetime-and-Requests">&#182;</a></h2>
+<h2 id="Practice-on-modules---datetime">Practice on modules - datetime<a class="anchor-link" href="#Practice-on-modules---datetime">&#182;</a></h2><hr>
+<ul>
+<li>There is also the time module working with UNIX timestamps.</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="n">IN</span><span class="p">:</span> <span class="kn">import</span> <span class="nn">time</span>
+       <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+   <span class="n">OUT</span><span class="p">:</span> <span class="mf">1512813460.746369</span>
+</pre></div>
+<p>More info in the Python Documentation <a href="https://docs.python.org/3/library/time.html">here</a>.</p>
+<ul>
+<li>Datetime - working with civil time datestamps.</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="n">IN</span><span class="p">:</span> <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+      <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="mf">1512813460.746369</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">T%H:%M:%SZ&#39;</span><span class="p">)</span>
+  <span class="n">OUT</span><span class="p">:</span> <span class="s1">&#39;2017-12-09T11:57:40Z&#39;</span>
+</pre></div>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Much-datetime,-very-wow">Much datetime, very wow<a class="anchor-link" href="#Much-datetime,-very-wow">&#182;</a></h2><hr>
+<div class="highlight"><pre><span></span><span class="n">IN</span><span class="p">:</span> <span class="kn">import</span> <span class="nn">datetime</span>
+</pre></div>
+<ul>
+<li>Constructing time objects<div class="highlight"><pre><span></span><span class="n">IN</span><span class="p">:</span> <span class="n">t</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">time</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">second</span><span class="o">.</span> <span class="n">t</span><span class="o">.</span><span class="n">tzinfo</span><span class="p">)</span>
+</pre></div>
+Also: datetime.time.min, datetime.time.max, datetime.time.resolution</li>
+<li>Dates are constructed like this<div class="highlight"><pre><span></span><span class="n">IN</span><span class="p">:</span> <span class="n">today</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
+    <span class="n">example_day</span> <span class="o">=</span> <span class="n">today</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2008</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+Try printing today converted to ctime(), timetuple(), toordinal().</li>
+<li>Current time<div class="highlight"><pre><span></span><span class="n">IN</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+</pre></div>
+</li>
+<li>Time differeces(deltas)<div class="highlight"><pre><span></span><span class="n">IN</span><span class="p">:</span> <span class="n">yesterday</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span> <span class="o">-</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</li>
+<li>Comparison<div class="highlight"><pre><span></span><span class="n">IN</span><span class="p">:</span> <span class="n">t1</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">time</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">t2</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">time</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">t1</span><span class="o">&lt;</span><span class="n">t2</span><span class="p">)</span>
+</pre></div>
+</li>
+</ul>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Dates-AND-Times.--Timezones---deteutil-intro.">Dates AND Times.  Timezones - deteutil intro.<a class="anchor-link" href="#Dates-AND-Times.--Timezones---deteutil-intro.">&#182;</a></h2><hr>
+<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">())</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="p">[</span> <span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;hour&#39;</span><span class="p">,</span> <span class="s1">&#39;minute&#39;</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">,</span> <span class="s1">&#39;microsecond&#39;</span><span class="p">]:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;{}:{}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span><span class="nb">getattr</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">attr</span><span class="p">)))</span>
+</pre></div>
+<p>OR</p>
+<div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">time</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">combine</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Datetime: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dt</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Requests-library">Requests library<a class="anchor-link" href="#Requests-library">&#182;</a></h2><hr>
+<div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://google.com&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">encoding</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Mutability">Mutability<a class="anchor-link" href="#Mutability">&#182;</a></h1><hr>
+<blockquote><p>An immutable object (unchangeable object) is an object whose state cannot be modified after it is created. This is in contrast to a mutable object (changeable object), which can be modified after it is created.</p>
+</blockquote>
+
+<pre><code>                                                                             Wikipedia
+</code></pre>
+<ul>
+<li>Immutability helps for debugging or working with multithreaded code.                                                                                  </li>
+<li>Introduction to tuples. Not just list with round brackets.<div class="highlight"><pre><span></span><span class="n">tup1</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;physics&#39;</span><span class="p">,</span> <span class="s1">&#39;chemistry&#39;</span><span class="p">,</span> <span class="mi">1997</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
+<span class="n">tup3</span> <span class="o">=</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span>
+</pre></div>
+</li>
+</ul>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*uFlTNY4W3czywyU18zxl8w.png" alt="Files"></p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Mutability-gotchas">Mutability gotchas<a class="anchor-link" href="#Mutability-gotchas">&#182;</a></h2><hr>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">append_to</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="p">[]):</span>
+    <span class="n">to</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">to</span>
+
+<span class="n">my_list</span> <span class="o">=</span> <span class="n">append_to</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
+<span class="n">my_second_list</span> <span class="o">=</span> <span class="n">append_to</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">my_second_list</span><span class="p">)</span>
+</pre></div>
+<p>This is what they give you on the easy job interviews:</p>
+<div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">a</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="n">a</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+<p>Also we did say a tuple is immutable. But you can do that:</p>
+<div class="highlight"><pre><span></span><span class="n">random</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span><span class="s2">&quot;d&quot;</span><span class="p">,</span><span class="s2">&quot;d&quot;</span><span class="p">])</span>
+<span class="n">random</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="k">print</span><span class="p">(</span><span class="n">random</span><span class="p">)</span>
+</pre></div>
+
 </div>
 </div>
 </div>
