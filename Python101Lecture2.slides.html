@@ -12739,13 +12739,13 @@ Try printing today converted to ctime(), timetuple(), toordinal().</li>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Mutability-gotchas">Mutability gotchas<a class="anchor-link" href="#Mutability-gotchas">&#182;</a></h2><hr>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">append_to</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="p">[]):</span>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_list</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="p">[]):</span>
     <span class="n">to</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">to</span>
 
-<span class="n">my_list</span> <span class="o">=</span> <span class="n">append_to</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">my_list</span> <span class="o">=</span> <span class="n">create_list</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
-<span class="n">my_second_list</span> <span class="o">=</span> <span class="n">append_to</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">my_second_list</span> <span class="o">=</span> <span class="n">create_list</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">my_second_list</span><span class="p">)</span>
 </pre></div>
 <p>This is what they give you on the easy job interviews:</p>
@@ -12755,11 +12755,286 @@ Try printing today converted to ctime(), timetuple(), toordinal().</li>
 <span class="n">a</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
 </pre></div>
-<p>Also we did say a tuple is immutable. But you can do that:</p>
+<p>Also we did say a tuple is immutable. But you can do the following:</p>
 <div class="highlight"><pre><span></span><span class="n">random</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span><span class="s2">&quot;d&quot;</span><span class="p">,</span><span class="s2">&quot;d&quot;</span><span class="p">])</span>
 <span class="n">random</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">7</span>
 <span class="k">print</span><span class="p">(</span><span class="n">random</span><span class="p">)</span>
 </pre></div>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Problem-with-procedural-programming">Problem with procedural programming<a class="anchor-link" href="#Problem-with-procedural-programming">&#182;</a></h1><hr>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_order_tax</span><span class="p">():</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">get_order_discount</span><span class="p">():</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">get_order_total</span><span class="p">():</span>
+    <span class="k">pass</span>
+</pre></div>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Another-problem">Another problem<a class="anchor-link" href="#Another-problem">&#182;</a></h2><hr>
+<p>Having many global variables is not a good idea. Polluted global namespace may lead to errors.</p>
+<div class="highlight"><pre><span></span><span class="n">x1</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="n">rise</span> <span class="o">=</span> <span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span>
+<span class="n">run</span> <span class="o">=</span> <span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span>
+
+<span class="n">slope</span> <span class="o">=</span> <span class="n">rise</span> <span class="o">/</span> <span class="n">run</span>
+</pre></div>
+<p>But what happens if we need another <em>x1/2,y1/2</em> coordinates?</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Object-Oriented-Programming(OOP)">Object Oriented Programming(OOP)<a class="anchor-link" href="#Object-Oriented-Programming(OOP)">&#182;</a></h1><hr>
+<ul>
+<li>Abstraction - eliminate complexity</li>
+<li>Encapsulation - hide the internals of a class</li>
+<li>Inheritance - inherit members(objects) from a parent class</li>
+<li>Polymorphism - access a class through its parent</li>
+</ul>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Classes-and-objects">Classes and objects<a class="anchor-link" href="#Classes-and-objects">&#182;</a></h2><hr>
+<blockquote><p>Class is a set or category of things having some property or attribute in common and differentiated from others by kind, type, or quality. In technical terms we can say that class is a blue print for individual objects with exact behaviour.</p>
+<p>Object is one of instances of the class. It can perform the functionalities which are defined in the class.</p>
+</blockquote>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Inheritance">Inheritance<a class="anchor-link" href="#Inheritance">&#182;</a></h2><hr>
+<ul>
+<li><p>Use it for <strong>is-a</strong> relationships but not a <strong>has-a</strong> ones.
+<img src="http://www.dba-oracle.com/images/t_obje2.gif" alt="Employee class"></p>
+</li>
+<li><p>Employee is a base class</p>
+</li>
+<li>Executive and wage are derived classes</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">firstname</span> <span class="o">=</span> <span class="n">first</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lastname</span> <span class="o">=</span> <span class="n">last</span>
+
+    <span class="k">def</span> <span class="nf">Name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">firstname</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">lastname</span>
+
+<span class="k">class</span> <span class="nc">Employee</span><span class="p">(</span><span class="n">Person</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">staffnum</span><span class="p">):</span>
+        <span class="n">Person</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">staffnumber</span> <span class="o">=</span> <span class="n">staffnum</span>
+
+    <span class="k">def</span> <span class="nf">GetEmployee</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Name</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span> <span class="o">+</span>  <span class="bp">self</span><span class="o">.</span><span class="n">staffnumber</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">&quot;Marge&quot;</span><span class="p">,</span> <span class="s2">&quot;Simpson&quot;</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">Employee</span><span class="p">(</span><span class="s2">&quot;Homer&quot;</span><span class="p">,</span> <span class="s2">&quot;Simpson&quot;</span><span class="p">,</span> <span class="s2">&quot;1007&quot;</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">Name</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">GetEmployee</span><span class="p">())</span>
+</pre></div>
+
+</div>
+</div>
+</div></div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Pet</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">species</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">species</span> <span class="o">=</span> <span class="n">species</span>
+
+    <span class="k">def</span> <span class="nf">getName</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">getSpecies</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">species</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> is a </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">species</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Cat</span><span class="p">(</span><span class="n">Pet</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">hates_dogs</span><span class="p">):</span>
+        <span class="n">Pet</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="s2">&quot;Cat&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hates_dogs</span> <span class="o">=</span> <span class="n">hates_dogs</span>
+
+    <span class="k">def</span> <span class="nf">hatesDogs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hates_dogs</span>
+
+<span class="k">class</span> <span class="nc">Dog</span><span class="p">(</span><span class="n">Pet</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">chases_cats</span><span class="p">):</span>
+        <span class="n">Pet</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="s2">&quot;Dog&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">chases_cats</span> <span class="o">=</span> <span class="n">chases_cats</span>
+
+    <span class="k">def</span> <span class="nf">chasesCats</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">chases_cats</span>
+</pre></div>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Inheritance-in-a-game-architecture">Inheritance in a game architecture<a class="anchor-link" href="#Inheritance-in-a-game-architecture">&#182;</a></h2><hr>
+<p><img src="https://koenig-media.raywenderlich.com/uploads/2012/10/CCSprite_diagram.jpg" alt="Game Diagram"></p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Inheritence-benefits">Inheritence benefits<a class="anchor-link" href="#Inheritence-benefits">&#182;</a></h2><hr>
+<ul>
+<li>Extensibility</li>
+<li>Reusability</li>
+<li>No redundancy - DRY compliant code</li>
+</ul>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Abstraction">Abstraction<a class="anchor-link" href="#Abstraction">&#182;</a></h2><hr>
+<ul>
+<li>Ignoring some futures, irrelevant for your use-case</li>
+<li>Abstraction helps with managing complexity<blockquote><p>Abstraction tries to factor out details from a common pattern so that programmers can work close to the level of human thought, leaving out details which matter in practice, but are not exigent to the problem being solved.</p>
+</blockquote>
+</li>
+</ul>
+<p>Simpifying a model - e.g. we do not need to know the height of the employee for our application.</p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="UML-Diagrams">UML Diagrams<a class="anchor-link" href="#UML-Diagrams">&#182;</a></h2><hr>
+<p><img src="https://image.slidesharecdn.com/umldiagrams-121030103135-phpapp02/95/uml-diagrams-38-638.jpg?cb=1351593190" alt=""></p>
+<ul>
+<li>Closed/Open arrows distinction</li>
+</ul>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Encapsulation">Encapsulation<a class="anchor-link" href="#Encapsulation">&#182;</a></h2><hr>
+<ul>
+<li>Hide the implementation and expose only the attributes/methods other programmers would need. Not more!</li>
+<li>Also reduces complexity - more maintainable code.</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">C</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">123</span>    <span class="c1"># OK to access directly</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_a</span> <span class="o">=</span> <span class="mi">123</span>   <span class="c1"># should be considered private</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__a</span> <span class="o">=</span> <span class="mi">123</span>  <span class="c1"># considered private, name mangled</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">C</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">a</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">_a</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">__a</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">_C__a</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Polymorphism">Polymorphism<a class="anchor-link" href="#Polymorphism">&#182;</a></h2><hr>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Animal</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>    <span class="c1"># Constructor of the class</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+    <span class="k">def</span> <span class="nf">talk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>              <span class="c1"># Abstract method, defined by convention only</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Subclass must implement abstract method&quot;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Cat</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">talk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;Meow!&#39;</span>
+
+<span class="k">class</span> <span class="nc">Dog</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">talk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;Woof! Woof!&#39;</span>
+
+<span class="n">animals</span> <span class="o">=</span> <span class="p">[</span><span class="n">Cat</span><span class="p">(</span><span class="s1">&#39;Missy&#39;</span><span class="p">),</span>
+           <span class="n">Cat</span><span class="p">(</span><span class="s1">&#39;Mr. Mistoffelees&#39;</span><span class="p">),</span>
+           <span class="n">Dog</span><span class="p">(</span><span class="s1">&#39;Lassie&#39;</span><span class="p">)]</span>
+
+<span class="k">for</span> <span class="n">animal</span> <span class="ow">in</span> <span class="n">animals</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">animal</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;: &#39;</span> <span class="o">+</span> <span class="n">animal</span><span class="o">.</span><span class="n">talk</span><span class="p">()</span>
+</pre></div>
+<blockquote><p>When several classes or subclasses have the same method names, but different implementations for these same methods, the classes are polymorphic because they are using a single interface to use with entities of different types. A function will be able to evaluate these polymorphic methods without knowing which classes are invoked.</p>
+</blockquote>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="TODO:-Cohesion-and-coupling">TODO: Cohesion and coupling<a class="anchor-link" href="#TODO:-Cohesion-and-coupling">&#182;</a></h2><hr>
 
 </div>
 </div>
