@@ -12862,7 +12862,7 @@ Try printing today converted to ctime(), timetuple(), toordinal().</li>
 <span class="k">class</span> <span class="nc">Employee</span><span class="p">(</span><span class="n">Person</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">staffnum</span><span class="p">):</span>
-        <span class="n">Person</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">staffnumber</span> <span class="o">=</span> <span class="n">staffnum</span>
 
     <span class="k">def</span> <span class="nf">GetEmployee</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -13035,6 +13035,200 @@ Try printing today converted to ctime(), timetuple(), toordinal().</li>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="TODO:-Cohesion-and-coupling">TODO: Cohesion and coupling<a class="anchor-link" href="#TODO:-Cohesion-and-coupling">&#182;</a></h2><hr>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="GIT-command-line-basics">GIT command line basics<a class="anchor-link" href="#GIT-command-line-basics">&#182;</a></h1><hr>
+<p><img src="http://blog.desafiolatam.com/wp-content/uploads/2016/05/git-github-logo.jpg" alt="Git and Github">
+Prerequisites</p>
+<ul>
+<li>Register on <strong>Github.com</strong></li>
+<li>Install git from <strong>git-scm.com</strong></li>
+</ul>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Local-Version-Control">Local Version Control<a class="anchor-link" href="#Local-Version-Control">&#182;</a></h1><hr>
+<p><img src="https://git-scm.com/book/en/v2/images/local.png" alt="Local"></p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Centralized-Version-Control-(SVN)">Centralized Version Control (SVN)<a class="anchor-link" href="#Centralized-Version-Control-(SVN)">&#182;</a></h1><hr>
+<p><img src="https://git-scm.com/book/en/v2/images/centralized.png" alt="Centralized"></p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Distributed-(Git)">Distributed (Git)<a class="anchor-link" href="#Distributed-(Git)">&#182;</a></h1><hr>
+<p><img src="https://git-scm.com/book/en/v2/images/distributed.png" alt="Distributed"></p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Fire-up-the-terminal-and-pretend-to-be-a-hacker">Fire up the terminal and pretend to be a hacker<a class="anchor-link" href="#Fire-up-the-terminal-and-pretend-to-be-a-hacker">&#182;</a></h2><hr>
+<p>First tell git who you are. The email here should match your Github registration.</p>
+<div class="highlight"><pre><span></span>git config --global user.name <span class="s2">&quot;Your Name&quot;</span>
+git config --global user.email <span class="s2">&quot;youremail@here&quot;</span>
+</pre></div>
+<p>Double check if it worked</p>
+<div class="highlight"><pre><span></span>git config --list
+</pre></div>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Hackers-need-help,-too">Hackers need help, too<a class="anchor-link" href="#Hackers-need-help,-too">&#182;</a></h2><hr>
+<div class="highlight"><pre><span></span>git <span class="nb">help</span> &lt;verb&gt;
+git &lt;verb&gt; --help
+</pre></div>
+<p><code>&lt;verb&gt; - any valid git command(config, add......)</code></p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Initialize-a-repository-from-existing-code">Initialize a repository from existing code<a class="anchor-link" href="#Initialize-a-repository-from-existing-code">&#182;</a></h2><hr>
+<p>Initalize:</p>
+
+<pre><code>git init</code></pre>
+<p>Check status:</p>
+
+<pre><code>git status</code></pre>
+<p>Add a <strong>.gitignore</strong> file with the following content. This is .gitignore adapted for a python project:</p>
+
+<pre><code>DS_Store
+.project
+*.pyc</code></pre>
+<p>Stage your files for committing:</p>
+
+<pre><code>git add .</code></pre>
+<p>OR</p>
+
+<pre><code>git add -A</code></pre>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Where--we-are-now">Where  we are now<a class="anchor-link" href="#Where--we-are-now">&#182;</a></h2><hr>
+<p><img src="https://git-scm.com/book/en/v2/images/areas.png" alt=""></p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Made-a-mistake.-Staged-some-files-I-did-not-intend-to">Made a mistake. Staged some files I did not intend to<a class="anchor-link" href="#Made-a-mistake.-Staged-some-files-I-did-not-intend-to">&#182;</a></h2><hr>
+<div class="highlight"><pre><span></span>git reset
+</pre></div>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Time-to-commit">Time to commit<a class="anchor-link" href="#Time-to-commit">&#182;</a></h2><hr>
+<div class="highlight"><pre><span></span>git commit -m <span class="s2">&quot;Yay.My first commit&quot;</span>
+</pre></div>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Workflow-with-remote-repositories">Workflow with remote repositories<a class="anchor-link" href="#Workflow-with-remote-repositories">&#182;</a></h2><hr>
+
+<pre><code>git clone
+git remote -v 
+git branch -a</code></pre>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Branching-basics">Branching basics<a class="anchor-link" href="#Branching-basics">&#182;</a></h2><hr>
+<p><img src="https://openclipart.org/download/242818/rebase0.svg" alt=""></p>
+
+<pre><code>git branch nameofbranch
+git checkout nameofbranch
+git push -u origin nameofbranch</code></pre>
+<p>And merging a branch to master:</p>
+
+<pre><code>git checkout master
+git pull origin master
+git branch --merged
+git merge nameofbranch
+git push origin master</code></pre>
+<p>Deleting a branch:</p>
+
+<pre><code>git branch -d nameofbranch
+git push origin --delete nameofbranch</code></pre>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="When-the-&#128169;hits-the-fan--amending,-resetting-and-reverting-commits">When the &#128169;hits the fan- amending, resetting and reverting commits<a class="anchor-link" href="#When-the-&#128169;hits-the-fan--amending,-resetting-and-reverting-commits">&#182;</a></h2><p>Check commit hash with <strong>git log</strong> and the status with <strong>git status</strong></p>
+
+<pre><code>git --amend -m "New message for the last commit"</code></pre>
+<p>Adding a file to the last commit:</p>
+
+<pre><code>git add filename
+git commit --amend</code></pre>
+<p>The examples above are not recommended because they change the git history and can break other's copy of the repository.</p>
+
+<pre><code>git reset --soft(or --hard) hashofthecommittoreturnto</code></pre>
+<p>or just reverting one commit:</p>
+
+<pre><code>git revert hashofthecommittorevert</code></pre>
+<p>Also removing untracked files from repo:</p>
+
+<pre><code>git clean -df</code></pre>
 
 </div>
 </div>
