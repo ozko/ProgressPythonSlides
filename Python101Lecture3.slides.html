@@ -12039,7 +12039,7 @@ a.anchor-link {
 <p>We can execute database queries in functions and with variables from our program.</p>
 <div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">insert_row</span><span class="p">(</span><span class="n">date</span><span class="p">,</span><span class="n">trans</span><span class="p">,</span><span class="n">symbol</span><span class="p">,</span><span class="n">qty</span><span class="p">,</span><span class="n">price</span><span class="p">):</span>
     <span class="n">c</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;INSERT INTO stocks (date,trans,symbol,qty,price) VALUES (?,?,?,?,?)&quot;</span><span class="p">,(</span><span class="n">date</span><span class="p">,</span><span class="n">trans</span><span class="p">,</span><span class="n">symbol</span><span class="p">,</span><span class="n">qty</span><span class="p">,</span><span class="n">price</span><span class="p">))</span>
-    <span class="n">c</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
 
 <span class="n">insert_row</span><span class="p">(</span><span class="s1">&#39;2011-01-05&#39;</span><span class="p">,</span><span class="s1">&#39;SELL&#39;</span><span class="p">,</span><span class="s1">&#39;APPL&#39;</span><span class="p">,</span><span class="mi">10000</span><span class="p">,</span><span class="mf">11.12</span><span class="p">)</span>
 </pre></div>
@@ -12058,41 +12058,15 @@ Then try SELECTing just one column from the table.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="err">```</span><span class="n">python</span>
-<span class="n">c</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM stocks where trans=?&#39;</span><span class="p">,(</span><span class="s1">&#39;BUY&#39;</span><span class="p">,))</span>
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM stocks where trans=?&#39;</span><span class="p">,(</span><span class="s1">&#39;BUY&#39;</span><span class="p">,))</span>
 </pre></div>
 
 </div>
 </div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-cyan-intense-fg ansi-bold">  File </span><span class="ansi-green-intense-fg ansi-bold">&#34;&lt;ipython-input-1-4ec236970c92&gt;&#34;</span><span class="ansi-cyan-intense-fg ansi-bold">, line </span><span class="ansi-green-intense-fg ansi-bold">1</span>
-<span class="ansi-yellow-intense-fg ansi-bold">    ```python</span>
-<span class="ansi-white-intense-fg ansi-bold">    ^</span>
-<span class="ansi-red-intense-fg ansi-bold">SyntaxError</span><span class="ansi-red-intense-fg ansi-bold">:</span> invalid syntax
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -12113,10 +12087,10 @@ Then try SELECTing just one column from the table.</p>
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="UPDATE-and-DELETE---point-of-no-return">UPDATE and DELETE - point of no return<a class="anchor-link" href="#UPDATE-and-DELETE---point-of-no-return">&#182;</a></h1><hr>
 <div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;UPDATE stocks SET price=1 WHERE price=11.12&#39;</span><span class="p">)</span>
-<span class="n">c</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
 </pre></div>
 <div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;DELETE FROM stocks WHERE price=1&#39;</span><span class="p">)</span>
-<span class="n">c</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -12130,6 +12104,299 @@ Then try SELECTing just one column from the table.</p>
 <div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;dump.sql&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">conn</span><span class="o">.</span><span class="n">iterdump</span><span class="p">():</span>
         <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="SQLAlchemy">SQLAlchemy<a class="anchor-link" href="#SQLAlchemy">&#182;</a></h2><hr>
+<p><img src="https://www.fullstackpython.com/img/logos/sqlalchemy.jpg" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="SQLAlchemy-is-an-ORM">SQLAlchemy is an ORM<a class="anchor-link" href="#SQLAlchemy-is-an-ORM">&#182;</a></h1><hr>
+<blockquote><p>Object-Relational Mapping (ORM) is a technique that lets you query and manipulate data from a database using an object-oriented paradigm. When talking about ORM, most people are referring to a library that implements the Object-Relational Mapping technique, hence the phrase "an ORM".</p>
+</blockquote>
+<table>
+<thead><tr>
+<th>Pros of ORMs:</th>
+<th>Cons of ORMs:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Feel more natural if you know Python</td>
+<td>Steep learning curve, not easy at all</td>
+</tr>
+<tr>
+<td>A lot of database handling stuff is done automatically</td>
+<td>It is a pain to set up right</td>
+</tr>
+<tr>
+<td>Abstracts the database, so not database agnostic</td>
+<td>You have no direct access to the database,only abstraction</td>
+</tr>
+<tr>
+<td>You can use OOP concepts(e.g inheritance)</td>
+<td>SQL queries can be better fine tuned for performance</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://lh4.googleusercontent.com/Xzlor68rkHmdKNlSyfoVEokbZsbeCrsiJyqlsDl99Rppe_3UvDM-CGoaj4vboovuCd4Br1p8DFrJBJSvTdmJ=w1920-h941" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="How-to-get-started">How to get started<a class="anchor-link" href="#How-to-get-started">&#182;</a></h1><hr>
+<div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">SQLAlchemy</span>
+</pre></div>
+<p>Import some modules from the library in your python script to test if it is installed right:</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">Table</span><span class="p">,</span> <span class="n">Column</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">String</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.ext.declarative</span> <span class="kn">import</span> <span class="n">declarative_base</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">sessionmaker</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://static1.squarespace.com/static/5286828ae4b08b83ea176e95/t/56d755e486db43c1b33edca5/1456952807640/" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Next-steps">Next steps<a class="anchor-link" href="#Next-steps">&#182;</a></h1><hr>
+<p>Create a database engine connection:</p>
+<div class="highlight"><pre><span></span><span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;sqlite:///employees.db&#39;</span><span class="p">)</span>  <span class="c1">#Try setting echo=True option</span>
+</pre></div>
+<p>Then create our Base class from which our classess will inherit:</p>
+<div class="highlight"><pre><span></span><span class="n">Base</span> <span class="o">=</span> <span class="n">declarative_base</span><span class="p">()</span>
+</pre></div>
+<p>And open a new database session(similarly to the cursor with the plain sqlite library):</p>
+<div class="highlight"><pre><span></span><span class="n">Session</span> <span class="o">=</span> <span class="n">sessionmaker</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
+<span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span>
+</pre></div>
+<p>Now we are game on!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Let's-experience-some-ORM-goodness">Let's experience some ORM goodness<a class="anchor-link" href="#Let's-experience-some-ORM-goodness">&#182;</a></h1><hr>
+<p>Create an Employee class like this:</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Employee</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="n">__tablename__</span>  <span class="o">=</span> <span class="s1">&#39;Employees&#39;</span>
+
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">first</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="n">String</span><span class="p">)</span>
+    <span class="n">last</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="s1">&#39;last&#39;</span><span class="p">,</span> <span class="n">String</span><span class="p">)</span>
+    <span class="n">pay</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="s1">&#39;pay&#39;</span><span class="p">,</span> <span class="n">Integer</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">pay</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">first</span> <span class="o">=</span> <span class="n">first</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last</span> <span class="o">=</span> <span class="n">last</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pay</span> <span class="o">=</span> <span class="n">pay</span>
+</pre></div>
+<p>Don't worry I will explain it :)</p>
+<p>Now create all tables inheriting from Base(we have only Employees for now):</p>
+<div class="highlight"><pre><span></span><span class="n">Base</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">create_all</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="See-what-I-did-there?">See what I did there?<a class="anchor-link" href="#See-what-I-did-there?">&#182;</a></h1><hr>
+<p>Now when we create an employee, a record for it gets added to the table Employees in our database:</p>
+<div class="highlight"><pre><span></span><span class="n">john</span> <span class="o">=</span> <span class="n">Employee</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;Johny&quot;</span><span class="p">,</span><span class="s2">&quot;Doe&quot;</span><span class="p">,</span><span class="mi">50000</span><span class="p">)</span>
+<span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">john</span><span class="p">)</span>
+<span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</pre></div>
+<p>Or if we want to add multiple objects at once instead of add we use:</p>
+<div class="highlight"><pre><span></span><span class="n">mary</span> <span class="o">=</span> <span class="n">Employee</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;Mary&quot;</span><span class="p">,</span><span class="s2">&quot;Johnson&quot;</span><span class="p">,</span><span class="mi">24000</span><span class="p">)</span>
+<span class="n">kate</span> <span class="o">=</span> <span class="n">Employee</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s2">&quot;Kate&quot;</span><span class="p">,</span><span class="s2">&quot;Jackson&quot;</span><span class="p">,</span><span class="mi">13000</span><span class="p">)</span>
+<span class="n">session</span><span class="o">.</span><span class="n">bulk_save_objects</span><span class="p">([</span><span class="n">john</span><span class="p">,</span><span class="n">mary</span><span class="p">,</span><span class="n">kate</span><span class="p">])</span>
+</pre></div>
+<p>We can also execute SQL queries the ORM way. This is equivalent to <strong>UPDATE Employee SET pay = pay +1 WHERE first='Johny'</strong>:</p>
+<div class="highlight"><pre><span></span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Employee</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">first</span><span class="o">=</span><span class="s2">&quot;Johny&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">Employee</span><span class="o">.</span><span class="n">pay</span><span class="p">:</span> <span class="n">Employee</span><span class="o">.</span><span class="n">pay</span> <span class="o">+</span> <span class="mi">1</span><span class="p">})</span>
+<span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</pre></div>
+<p>And this is equivalent to <strong>SELECT first FROM Employee</strong>:</p>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">employee</span> <span class="ow">in</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Employee</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">employee</span><span class="o">.</span><span class="n">first</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Loading-data-from-file-into-a-database">Loading data from file into a database<a class="anchor-link" href="#Loading-data-from-file-into-a-database">&#182;</a></h1><hr>
+<p>Get the temperature deviation dataset from <a href="http://tiny.cc/tempdev">here</a>.</p>
+<p>Install the pandas library.</p>
+<p>Then load the csv file into the database like this:</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;sqlite:///temperature.db&#39;</span><span class="p">)</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;TempVariance1880-2017.csv&#39;</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
+<span class="n">content</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;temperatures&#39;</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Plotting/Charting">Plotting/Charting<a class="anchor-link" href="#Plotting/Charting">&#182;</a></h1><hr>
+<p>Let's get back to our Employee class and database. What if we want to create a barchart with the names of the employees on the horizontal axis and their corresponding salaries on the vertical.</p>
+<p>So we need something like this</p>
+<div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">john</span><span class="p">,</span><span class="n">mary</span><span class="p">,</span><span class="n">kate</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">50000</span><span class="p">,</span><span class="mi">24000</span><span class="p">,</span><span class="mi">13000</span><span class="p">]</span>
+</pre></div>
+<p>How do query the database?</p>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">employee</span> <span class="ow">in</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Employee</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">employee</span><span class="o">.</span><span class="n">first</span><span class="p">)</span>
+    <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">employee</span><span class="o">.</span><span class="n">pay</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://matplotlib.org/_static/logo2.svg" alt="">
+<img src="http://wiki.openhatch.org/images/d/d8/Matplotlib_gallery.png" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="http://matplotlib.1069221.n5.nabble.com/file/n39657/image.png" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Add-the-following-to-your-code-to-get-a-nice-chart">Add the following to your code to get a nice chart<a class="anchor-link" href="#Add-the-following-to-your-code-to-get-a-nice-chart">&#182;</a></h1><hr>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Once-we-plotted-from-database,-let's-plot-from-csv">Once we plotted from database, let's plot from csv<a class="anchor-link" href="#Once-we-plotted-from-database,-let's-plot-from-csv">&#182;</a></h1><hr>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="n">temperatures</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;TempVariance1880-2017.csv&#39;</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">temperatures</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">temperatures</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">temperatures</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Some-other-things-you-should-know">Some other things you should know<a class="anchor-link" href="#Some-other-things-you-should-know">&#182;</a></h1><hr>
+<p>You can change the style of the chart like this:</p>
+<div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;ggplot&quot;</span><span class="p">)</span>
+</pre></div>
+<p>I like the fivethirtyeight style.</p>
+<p>Also you can add title and x and y labels to the chart:</p>
+<div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Global Land and Ocean Temperature Anomalies, June&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;year&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;degrees F +/- from average&quot;</span><span class="p">)</span>
+</pre></div>
+<p>Simiarly to showing the chart you can save it to a file</p>
+<div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;sampleFileName.png&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="We-have-bar-chart-what-about-a-line-chart?">We have bar chart what about a line chart?<a class="anchor-link" href="#We-have-bar-chart-what-about-a-line-chart?">&#182;</a></h1><hr>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+
+<span class="n">x2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="mi">12</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;First Line&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Second Line&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Plot Number&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Important var&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Interesting Graph</span><span class="se">\n</span><span class="s1">Check it out&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 
 </div>
